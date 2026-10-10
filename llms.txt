@@ -1,0 +1,19 @@
+# @three-ws/see
+
+> Let an AI agent SEE a 3D model: render any GLB from several angles and get back frames it can actually look at, plus the geometry facts.
+
+@three-ws/see is a JavaScript library from three.ws. Install: `npm install @three-ws/see`.
+
+## Docs
+
+- [README](https://github.com/nirholas/three-ws-see/blob/main/README.md): install, configuration, full reference
+- [Documentation site](https://nirholas.github.io/three-ws-see/): the README as a web page
+- [Full text for LLMs](https://nirholas.github.io/three-ws-see/llms-full.txt): README inlined
+- [AGENTS.md](https://github.com/nirholas/three-ws-see/blob/main/AGENTS.md): guidance for coding agents
+
+## Project
+
+- [Source](https://github.com/nirholas/three-ws-see)
+- [npm](https://www.npmjs.com/package/@three-ws/see)
+- [three.ws](https://three.ws): the platform this is part of
+- [Issues](https://github.com/nirholas/three-ws-see/issues)

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@three-ws/see: Let an AI agent SEE a 3D model</title>
+<meta name="description" content="Let an AI agent SEE a 3D model: render any GLB from several angles and get back frames it can actually look at, plus the geometry facts.">
+<link rel="canonical" href="https://nirholas.github.io/three-ws-see/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="three.ws">
+<meta property="og:title" content="@three-ws/see">
+<meta property="og:description" content="Let an AI agent SEE a 3D model: render any GLB from several angles and get back frames it can actually look at, plus the geometry facts.">
+<meta property="og:url" content="https://nirholas.github.io/three-ws-see/">
+<meta property="og:image" content="https://nirholas.github.io/three-ws-see/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@three-ws/see">
+<meta name="twitter:description" content="Let an AI agent SEE a 3D model: render any GLB from several angles and get back frames it can actually look at, plus the geometry facts.">
+<meta name="twitter:image" content="https://nirholas.github.io/three-ws-see/og.png">
+<meta name="keywords" content="3d, glb, gltf, ai-agents, agent, vision, multimodal, mcp, render, turntable, text-to-3d, three.ws">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<link rel="icon" href="https://three.ws/three-ws-mcp-icon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"@three-ws/see","description":"Let an AI agent SEE a 3D model: render any GLB from several angles and get back frames it can actually look at, plus the geometry facts.","codeRepository":"https://github.com/nirholas/three-ws-see","programmingLanguage":"JavaScript","license":"https://spdx.org/licenses/Apache-2.0.html","version":"0.1.0","url":"https://nirholas.github.io/three-ws-see/","author":{"@type":"Organization","name":"three.ws","url":"https://three.ws"},"keywords":"3d, glb, gltf, ai-agents, agent, vision, multimodal, mcp, render, turntable, text-to-3d, three.ws"}</script>
+<style>:root{--bg:#fff;--fg:#111418;--mut:#586069;--line:#e3e6ea;--acc:#2563eb;--code:#f4f6f8;--card:#fafbfc}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0d10;--fg:#e8eaed;--mut:#9aa3ad;--line:#232830;--acc:#6ea0ff;--code:#14181d;--card:#10141a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc)}a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+header.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;text-decoration:none;color:var(--fg)}
+.bar nav{margin-left:auto;display:flex;gap:16px;font-size:14px}
+.bar nav a{color:var(--mut);text-decoration:none;transition:color .15s}.bar nav a:hover{color:var(--fg)}
+.hero{max-width:1100px;margin:0 auto;padding:48px 16px 24px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:70ch;font-size:18px;margin:0 0 24px}
+.install{display:flex;align-items:center;gap:8px;max-width:620px;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:6px 6px 6px 14px}
+.install code{flex:1;overflow-x:auto;white-space:nowrap;font:14px ui-monospace,SFMono-Regular,Menlo,monospace}
+.install button{border:0;background:var(--acc);color:#fff;border-radius:7px;padding:8px 14px;font:600 13px system-ui;cursor:pointer;transition:transform .12s,opacity .12s}
+.install button:hover{opacity:.9}.install button:active{transform:scale(.96)}
+.cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.cta a{padding:9px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;color:var(--fg);transition:border-color .15s,transform .15s}
+.cta a:hover{border-color:var(--acc);transform:translateY(-1px)}.cta a.pri{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.layout{max-width:1100px;margin:0 auto;padding:8px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:40px}
+@media(max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}.toc{display:none}}
+.toc{position:sticky;top:76px;align-self:start;font-size:14px;border-left:1px solid var(--line);padding-left:16px}
+.toc p{margin:0 0 8px;font-weight:700;color:var(--mut);text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:6px 0}.toc a{color:var(--mut);text-decoration:none}.toc a:hover{color:var(--fg)}
+main{min-width:0;overflow-wrap:anywhere}main pre code{overflow-wrap:normal}main img{max-width:100%;height:auto}
+main h2{margin-top:2.2em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+.anchor{margin-left:-1.1em;padding-right:.4em;text-decoration:none;opacity:0;color:var(--mut)}h2:hover .anchor,h3:hover .anchor,h4:hover .anchor{opacity:1}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.5}
+code{font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);padding:.15em .35em;border-radius:5px}pre code{background:none;padding:0}
+table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}th{background:var(--card)}
+blockquote{margin:1em 0;padding:.2em 1em;border-left:4px solid var(--line);color:var(--mut)}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+.foot-in{max-width:1100px;margin:0 auto;padding:24px 16px;display:flex;gap:16px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+<a class="brand" href="https://nirholas.github.io/three-ws-see/">@three-ws/see</a>
+<nav aria-label="Project links"><a href="https://github.com/nirholas/three-ws-see">GitHub</a><a href="https://www.npmjs.com/package/@three-ws/see">npm</a><a href="llms.txt">llms.txt</a><a href="https://three.ws">three.ws</a></nav>
+</div></header>
+<section class="hero">
+<h1>@three-ws/see</h1>
+<p>Let an AI agent SEE a 3D model: render any GLB from several angles and get back frames it can actually look at, plus the geometry facts.</p>
+<div class="install" role="group" aria-label="Install command"><code>npm install @three-ws/see</code><button type="button" data-copy="npm install @three-ws/see">Copy</button></div>
+<div class="cta"><a class="pri" href="https://github.com/nirholas/three-ws-see">View on GitHub</a><a href="https://github.com/nirholas/three-ws-see/stargazers">Star the repo</a></div>
+</section>
+<div class="layout">
+<main id="content"><h1>@three-ws/see</h1>
+<p><strong>Give an AI agent eyes for 3D.</strong></p>
+<p>Every text-to-3D API on earth answers with a URL to a binary file. A human clicks it. An agent cannot: a <code>.glb</code> is opaque to a language model, so the agent that just generated an asset has no way to check its own work. That is why agentic 3D has been stuck at one shot and a shrug.</p>
+<p>This package closes the loop in one call. Hand it a GLB URL and get back frames of the model rendered from several angles, ready to put in front of any multimodal model, plus the geometry facts and a plain reading of what they mean.</p>
+<pre><code>npm install @three-ws/see
+</code></pre>
+<p>No key. No account. The service is free.</p>
+<h2 id="look-at-a-model"><a class="anchor" href="#look-at-a-model" aria-label="Link to this section">#</a>Look at a model</h2>
+<pre><code class="language-js">import { see } from &#39;@three-ws/see&#39;;
+
+const look = await see(&#39;https://example.com/robot.glb&#39;);
+
+look.views;
+// [ { view: &#39;three-quarter&#39;, theta: 35, phi: 78, imageUrl: &#39;https://…/a.png&#39; },
+//   { view: &#39;front&#39;, … }, { view: &#39;side&#39;, … }, { view: &#39;back&#39;, … } ]
+
+look.notes;
+// [ &#39;12,400 triangles, a normal real-time budget for a hero prop or character.&#39; ]
+
+look.stats;      // { vertices, triangles, materials, textures, animations, … }
+look.viewerUrl;  // spin it in a browser
+look.arUrl;      // place it in a real room from a phone
+</code></pre>
+<h2 id="close-the-loop-generate-look-judge-fix"><a class="anchor" href="#close-the-loop-generate-look-judge-fix" aria-label="Link to this section">#</a>Close the loop: generate, look, judge, fix</h2>
+<p>The reason this exists. An agent that can see its own output stops guessing.</p>
+<pre><code class="language-js">import Anthropic from &#39;@anthropic-ai/sdk&#39;;
+import { see, toMessageContent } from &#39;@three-ws/see&#39;;
+
+const anthropic = new Anthropic();
+
+async function critique(glbUrl, intent) {
+  const look = await see(glbUrl);
+  const message = await anthropic.messages.create({
+    model: &#39;claude-sonnet-5&#39;,
+    max_tokens: 512,
+    messages: [{
+      role: &#39;user&#39;,
+      content: [
+        { type: &#39;text&#39;, text: `This model was meant to be: ${intent}. Judge it. Is the subject complete and recognisable, is the far side finished, is anything melted or fused? If it needs work, say exactly what to change.` },
+        ...(await toMessageContent(look)),
+      ],
+    }],
+  });
+  return message.content[0].text;
+}
+</code></pre>
+<p><code>toMessageContent</code> shapes a look into multimodal chat content: one labelled text block per angle followed by the image itself. It passes image URLs by default; <code>{ fetchImages: true }</code> inlines base64 for APIs that will not fetch a URL themselves.</p>
+<h2 id="pick-your-angles"><a class="anchor" href="#pick-your-angles" aria-label="Link to this section">#</a>Pick your angles</h2>
+<pre><code class="language-js">await see(glbUrl, { views: [&#39;back&#39;, &#39;top&#39;], size: 768 });
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>View</th>
+<th>What it catches</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>three-quarter</code></td>
+<td>Form and depth, the way a product shot reads (default first)</td>
+</tr>
+<tr>
+<td><code>front</code></td>
+<td>Facing, symmetry, the subject&#39;s identity</td>
+</tr>
+<tr>
+<td><code>side</code></td>
+<td>Profile, depth collapse, flattened geometry</td>
+</tr>
+<tr>
+<td><code>back</code></td>
+<td>The half a single-view generator most often leaves unfinished</td>
+</tr>
+<tr>
+<td><code>top</code></td>
+<td>Footprint, layout, whether it is hollow</td>
+</tr>
+<tr>
+<td><code>bottom</code></td>
+<td>Missing caps, inverted normals, floating geometry</td>
+</tr>
+</tbody></table>
+<p>Up to six views per call, <code>size</code> from 128 to 1024 pixels (default 512). Unknown angle names are ignored rather than failing the call, so a guess still returns something useful.</p>
+<h2 id="errors-are-typed"><a class="anchor" href="#errors-are-typed" aria-label="Link to this section">#</a>Errors are typed</h2>
+<pre><code class="language-js">import { see, SeeError } from &#39;@three-ws/see&#39;;
+
+try {
+  await see(url);
+} catch (err) {
+  if (err instanceof SeeError &amp;&amp; err.code === &#39;rate_limited&#39;) {
+    await new Promise((r) =&gt; setTimeout(r, err.retryAfter * 1000));
+  }
+}
+</code></pre>
+<p><code>invalid_url</code>, <code>render_failed</code>, <code>rate_limited</code>, <code>timeout</code>, <code>unreachable</code>. A partially-rendered turntable is <strong>not</strong> an error: you get the frames that worked plus <code>look.missingViews</code> naming the angles that did not, because three good views beat a failure.</p>
+<h2 id="options"><a class="anchor" href="#options" aria-label="Link to this section">#</a>Options</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>views</code></td>
+<td><code>[&#39;three-quarter&#39;,&#39;front&#39;,&#39;side&#39;,&#39;back&#39;]</code></td>
+<td>Up to 6, from the table above</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td><code>512</code></td>
+<td>Square pixels, 128 to 1024</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td><code>true</code></td>
+<td>Set false to skip the geometry pass</td>
+</tr>
+<tr>
+<td><code>baseUrl</code></td>
+<td><code>https://three.ws</code></td>
+<td>Point at another deployment</td>
+</tr>
+<tr>
+<td><code>timeoutMs</code></td>
+<td><code>120000</code></td>
+<td>Rendering holds a browser for seconds</td>
+</tr>
+<tr>
+<td><code>fetch</code></td>
+<td>global <code>fetch</code></td>
+<td>Inject for tests, proxies, tracing</td>
+</tr>
+</tbody></table>
+<h2 id="using-mcp-instead"><a class="anchor" href="#using-mcp-instead" aria-label="Link to this section">#</a>Using MCP instead?</h2>
+<p>The same capability is an MCP tool, <code>look_at_model</code>, on <code>https://three.ws/api/mcp-studio</code>. There the frames come back as MCP <strong>image content blocks</strong>, so a multimodal client renders them straight into the conversation and the model sees the model with no glue code at all.</p>
+<h2 id="related"><a class="anchor" href="#related" aria-label="Link to this section">#</a>Related</h2>
+<ul>
+<li><a href="https://three.ws/docs/3d-vision">three.ws/docs/3d-vision</a>: the full surface, REST and MCP</li>
+<li><a href="https://three.ws/api/3d/look"><code>POST /api/3d/look</code></a>: the endpoint underneath (GET it for a discovery doc)</li>
+<li><a href="https://www.npmjs.com/package/@three-ws/retarget"><code>@three-ws/retarget</code></a>: retarget animation onto any humanoid GLB</li>
+</ul>
+<p>Apache-2.0.</p>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#look-at-a-model">Look at a model</a></li><li><a href="#close-the-loop-generate-look-judge-fix">Close the loop: generate, look, judge, fix</a></li><li><a href="#pick-your-angles">Pick your angles</a></li><li><a href="#errors-are-typed">Errors are typed</a></li><li><a href="#options">Options</a></li><li><a href="#using-mcp-instead">Using MCP instead?</a></li><li><a href="#related">Related</a></li></ul></nav>
+</div>
+<footer><div class="foot-in"><span>Apache-2.0 licensed</span><a href="https://github.com/nirholas/three-ws-see/issues">Issues</a><a href="https://github.com/nirholas/three-ws-see/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/nirholas/three-ws-see/security/policy">Security</a><a href="https://three.ws">Part of three.ws</a></div></footer>
+<script>document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+var t=b.getAttribute('data-copy');var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1400)};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){})}
+else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}a.remove()}})});</script>
+</body>
+</html>
